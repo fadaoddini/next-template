@@ -1,0 +1,96 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 5px;
+    padding: 5px 5px 20px 5px;
+    margin: 7px 0;
+    width: 100%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    background-color: #fff;
+  }
+  
+  .imageContainer {
+    width: 80px;
+    height: 80px;
+    margin-top: 20px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 10px;
+  }
+  
+  .image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .name {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  .button_follow {
+    background-color: var(--button-bg-fallow, #0070f3);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+    padding: 5px 16px;
+    margin: 5px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  .button_fallow:hover {
+    background-color: var(--button-bg-fallow-hover, #0070f3);
+    color: var(--darked-red, #0070f3);
+    border: 1px solid var(--darked-red);
+  }
+  
+  
+  .button_unfollow {
+    background-color: var(--button-bg-un-fallow, #0070f3);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+    padding: 5px 16px;
+    margin: 5px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  .button_unfollow:hover {
+    background-color: var(--button-bg-un-fallow-hover, #0070f3);
+    color: var(--darked-red, #0070f3);
+    border: 1px solid var(--darked-red);
+  }
+  
+  .button_sms {
+    background-color: var(--button-bg-sms, #0070f3);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+    padding: 5px 16px;
+    margin: 5px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  .button_sms:hover {
+    background-color: var(--button-bg-sms-hover, #0070f3);
+    color: var(--darked-green, #0070f3);
+    border: 1px solid var(--darked-green);
+  }
+  
+  .button + .button {
+    margin-left: 10px;
+  }
+  

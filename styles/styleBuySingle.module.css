@@ -1,0 +1,75 @@
+/* برای در نظر گرفتن فضای کافی برای نوار جستجو */
+.container {
+  padding: 0 ;
+  max-width: 1300px;
+  margin: 50px auto 0 auto;
+
+}
+
+
+/* بخش‌بندی صفحه */
+.layout {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 10px;
+
+}
+
+/* ستون چپ */
+.left {
+  width: 270px;
+  background-color: #f7f7f7;
+  border-radius: 5px ;
+  padding: 0px;
+  height: 100%;
+  margin-right: 10px;
+}
+
+/* بخش اصلی */
+.main {
+  flex: 1; /* بخش اصلی اندازه‌اش خودکار باقیمانده فضا را پر می‌کند */
+  border-radius: 5px ;
+  border-radius: 5px ;
+  padding:0px;
+  height: 100%;
+  margin: 0 10px 0 0; /* فاصله بین ستون‌ها */
+}
+
+/* ستون راست */
+.right {
+
+  width: 250px;
+  text-align: center;
+
+  border-radius: 5px ;
+  padding: 0px;
+  height: 100%;
+
+}
+
+/* استایل تیتر */
+.title {
+  text-align: center;
+  color: #333;
+  font-size: 24px;
+  margin: 20px 0;
+}
+.gridContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* سه ستون مساوی */
+  gap: 10px; /* فاصله بین کارت‌ها */
+  
+}
+.gridContainer {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr); /* سه ستون مساوی */
+  gap: 10px; /* فاصله بین کارت‌ها */
+}
+
+.bider_right{
+  padding: 5px;
+  margin-bottom: 10px;
+  font-size: 0.9rem;
+  background-color: var(--light-orange);
+  border-radius: 5px ;
+}

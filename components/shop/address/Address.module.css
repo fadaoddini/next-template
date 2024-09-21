@@ -1,0 +1,162 @@
+/* Address.module.css */
+
+/* استایل برای کارت کلی */
+.cardContainer {
+  display: flex;
+  justify-content: center;
+  direction: rtl;
+  margin: 20px;
+}
+
+.card {
+  width: 95%;
+  
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: var(--card-bg); /* پس‌زمینه سفید */
+  
+  display: flex;
+  gap: 20px;
+}
+
+/* استایل برای پنل سمت چپ */
+.leftPanel {
+  width: 35%;
+  background-color: var(--white); /* پس‌زمینه روشن */
+  padding: 1%;
+  border: 1px solid var(--light-orange); /* مرز نارنجی */
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* استایل برای فرم */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* استایل برای ردیف‌های فرم */
+.row {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px; /* فاصله بین آیتم‌ها در هر ردیف */
+}
+
+/* استایل برای گروه‌های ورودی */
+.inputGroup {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.custom_input {
+  border: 1px solid var(--light-orange); /* مرز نارنجی */
+  border-radius: 5px;
+  height: 50px;
+  font-size: 0.7rem;
+}
+
+.label_form {
+  margin-bottom: 2px;
+  font-size: 1rem;
+  color: var(--black); /* رنگ متن مشکی */
+}
+
+.input_form {
+  width: 100%;
+  padding: 2px;
+  font-size: 1rem;
+  border: 1px solid var(--light-orange); /* مرز نارنجی */
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: var(--white); /* پس‌زمینه سفید */
+  margin-top: 5px;
+}
+
+.submitButton {
+  background-color: var(--light-orange); /* پس‌زمینه نارنجی */
+  color: var(--white); /* رنگ متن سفید */
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+  margin-top: 20px;
+}
+
+.submitButton:hover {
+  background-color: var(--dark-orange); /* تغییر رنگ پس‌زمینه در حالت هاور */
+}
+
+/* استایل برای پنل سمت راست */
+.rightPanel {
+  width: 70%;
+}
+
+/* استایل برای آیتم‌های لیست آدرس‌ها */
+.cardItem {
+  margin-bottom: 15px;
+  border: 1px solid var(--light-orange); /* مرز نارنجی */
+  border-radius: 8px;
+  padding: 10px;
+  background-color: var(--light-orange2); /* پس‌زمینه روشن */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-size: 0.9rem;
+}
+
+.cardContent {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cardActions {
+  display: flex;
+  gap: 5px;
+  margin-top: 10px;
+}
+
+.editButton {
+  background-color: var(--dark-orange); /* پس‌زمینه نارنجی */
+  border-radius: 5px;
+  padding: 4px 14px;
+  font-size: 0.8rem;
+  border: none;
+  margin: 6px;
+  color: var(--white); /* رنگ متن سفید */
+}
+
+.editButton:hover {
+  background-color: var(--dark-orange); /* تغییر رنگ پس‌زمینه در حالت هاور */
+}
+
+.deleteButton {
+  border: none;
+  background-color: var(--darked-red); /* پس‌زمینه قرمز */
+  color: var(--white); /* رنگ متن سفید */
+  border-radius: 5px;
+  padding: 4px 14px;
+  font-size: 0.8rem;
+  margin: 6px;
+}
+
+.deleteButton:hover {
+  background-color: var(--darked-red); /* تغییر رنگ در حالت هاور */
+}
+
+.selectButton {
+  border: none;
+  background-color: var(--dark-green); /* پس‌زمینه سبز */
+  color: var(--white); /* رنگ متن سفید */
+  border-radius: 5px;
+  padding: 4px 14px;
+  font-size: 0.8rem;
+  margin: 6px;
+}
+
+.selectButton:hover {
+  background-color: var(--dark-green); /* تغییر رنگ پس‌زمینه در حالت هاور */
+}

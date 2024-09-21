@@ -1,0 +1,95 @@
+@font-face {
+  font-family: 'IranSans';
+  src: url('/fonts/IranSans.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+:root {
+  /* رنگ‌های پالت */
+  --black: #000000;
+  --white: #ffffff;
+  --light-orange2: #ffefd4; /* نارنجی کم‌رنگ */
+  --light-orange: #ffce80; /* نارنجی کم‌رنگ */
+  --dark-orange: #ffa412; /* نارنجی پررنگ */
+  --light-blue: #98dfff; /* آبی کم‌رنگ */
+  --dark-blue: #2e8bb6; /* آبی پررنگ */
+  --light-green: #e7fff5; /* سبز کم‌رنگ */
+  --dark-green: #169660; /* سبز پررنگ */
+  --light-red: rgb(255, 231, 231); /* قرمز کم‌رنگ */
+  --dark-red: #a12222; /* قرمز پررنگ */
+  --bg-nav: #eeeeee;
+
+  /* رنگ‌های پس‌زمینه و متن پیش‌فرض */
+  --background: #ffffff;
+  --foreground: #171717;
+
+  /* رنگ‌های جدید برای استایل کارت */
+  --card-bg: #f7f7f7; /* رنگ پس‌زمینه کارت */
+  --card-shadow: rgba(0, 0, 0, 0.1); /* رنگ سایه کارت */
+  --title-color: var(--foreground); /* رنگ عنوان محصول */
+  --offer-color: var(--foreground); /* رنگ متن پیشنهاد */
+  --green-text: var(--dark-green); /* رنگ سبز برای پیشنهادات */
+  --detail-text: var(--foreground); /* رنگ متن جزئیات محصول */
+  --attr-card: #007a3d; 
+  --darked-green: #1b7952; /*  تر سبز پررنگ */
+  --darked-red: #791b1b; /*  تر سبز پررنگ */
+  --darked-orange:#ff7b00;
+  --btn-bg: #3b3b3b; /*  تر سبز پررنگ */
+  --btn-bg-hover: #8a8a8a; /*  تر سبز پررنگ */
+  --button-bg-fallow: var(--dark-orange);
+  --button-bg-fallow-hover: var(--light-orange);
+  --button-bg-un-fallow: var(--dark-red);
+  --button-bg-un-fallow-hover: var(--light-red);
+  --button-bg-sms: var(--dark-orange);
+  --button-bg-sms-hover: var(--light-orange);
+
+  /* رنگ‌های جدید برای استایل نمودار */
+  --chart-red-dark: #862c2c; 
+  --chart-red: #cf5151; 
+  --chart-green-dark: #165e3a; 
+  --chart-green: #4dad7d; 
+  --chart-blue: #c2ccd3ab; 
+  --chart-black: #5e5e5e; 
+
+  --ok:#1c9466;
+
+
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+
+
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+ 
+}
+
+* {
+  font-family: 'IranSans', sans-serif;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  direction: rtl;
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+}

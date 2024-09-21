@@ -1,0 +1,161 @@
+/* استایل کارت کلی */
+.card {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  background-color: var(--white); /* پس‌زمینه کارت */
+  box-shadow: 0 2px 4px var(--card-shadow); /* سایه کارت */
+  padding: 10px 80px 10px 10px;
+  width: 87%;
+  border: 1px solid var(--bg-color);
+  border-radius: 7px;
+  margin: 5px 40px 5px 5px;
+  cursor: pointer;
+  align-items: flex-start;
+ 
+}
+
+.card:hover {
+    background-color: var(--bg-color-hover);
+}
+
+.circleContainer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden; /* فقط دایره درون این کانتینر برش می‌خورد */
+  pointer-events: none; /* غیر فعال کردن تعاملات */
+  z-index: 0;
+}
+
+/* نیم‌دایره */
+.halfCircle {
+  position: absolute;
+  top: 40%; /* تنظیم موقعیت بالایی */
+  right: 10%; /* تنظیم موقعیت سمت راست */
+  width: 100%; /* عرض نیم‌دایره */
+  height: 200px; /* ارتفاع نیم‌دایره */
+  background-color: var(--dark-orange); /* رنگ نارنجی */
+  border-radius: 50%; /* ایجاد دایره */
+  opacity: 0.2; /* شفافیت برای محو کردن */
+  transition: all 0.5s ease; /* انتقال آرام برای همه تغییرات */
+}
+
+.card:hover .halfCircle {
+  top: -40%;
+  right: -40%; /* تنظیم موقعیت سمت راست */
+  width: 200%; /* عرض نیم‌دایره */
+  height: 600px; /* ارتفاع نیم‌دایره */
+  opacity: 0.1; /* شفافیت برای محو کردن */
+}
+
+
+/* استایل تصویر و کانتینر آن */
+.imageContainer {
+  position: absolute;
+  top: 20px;
+  right: -35px;
+  width: 100px;
+  
+  height: 100px;
+  
+  border-radius: 8px;
+  margin-left: 10px;
+}
+
+.image {
+  border-radius: 10px;
+  border: 1px solid var(--bg-color);
+  object-fit: cover;
+}
+
+/* استایل بخش اطلاعات */
+.info {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+/* عنوان محصول */
+.title {
+  font-weight: bold;
+  font-size: 0.8rem;
+  margin:4px 0;
+  color: var(--text-attr); /* رنگ عنوان */
+
+}
+
+/* پیشنهاد بالا */
+.offer {
+  font-size: 0.75rem;
+  margin-bottom: 8px;
+  color: var(--darked-red); /* رنگ متن پیشنهاد */
+  border-bottom: 1px solid var(--bg-color);
+}
+
+.attr {
+  color: var(--darked-red); /* رنگ سبز برای پیشنهاد */
+  font-weight: bold;
+  margin-left: 5px;
+  z-index: 100;
+}
+
+.green {
+  color: var(--green-text); /* رنگ سبز برای پیشنهاد */
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+/* جزئیات محصول */
+.details {
+  display: flex;
+  flex-direction: column;
+}
+
+/* جزئیات هر خط */
+.detail {
+  font-size: 0.75rem;
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+  color: var(--detail-text); /* رنگ متن جزئیات */
+}
+
+/* آیکن در کنار جزئیات */
+.icon {
+  margin-right: 3px;
+  margin-left: 5px;
+  background-color: var(--white);
+  border-radius: 50%;
+  padding: 0px 1px;
+  z-index: 1000;
+  box-shadow: 0 2px 4px var(--card-shadow); /* سایه کارت */
+
+}
+
+/* متن‌های بولد */
+.bold {
+  font-weight: bold;
+  margin-left: 5px;
+}
+
+.timer {
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: var(--dark-orange);
+    width: 30px; 
+    height: 100%;
+    font-size: 0.8rem;
+    display: flex;
+    border-radius: 0 5px 5px 0;
+    align-items: center;
+    justify-content: center;
+    writing-mode: vertical-rl; /* نوشته را عمودی می‌کند */
+    text-align: center; /* متن را در وسط عمودی قرار می‌دهد */
+    color: var(--white); /* رنگ متن تایمر */
+    transform: rotate(180deg); /* چرخش 180 درجه متن */
+  }
+  
