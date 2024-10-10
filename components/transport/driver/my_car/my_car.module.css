@@ -1,0 +1,121 @@
+.list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.listItem {
+  display: flex;
+  position: relative;
+  align-items: center;
+  background-color: var(--white);
+  border-radius: 5px;
+  padding: 10px;
+  color: #000000;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(172, 172, 172, 0.1);
+  margin: 10px 0;
+  cursor: pointer;
+  transition: background-color 0.3s ease, border-color 0.3s ease,
+    color 0.3s ease;
+}
+.listItem img {
+  width: 80px;
+  height: 80px;
+  border-radius: 10px;
+  object-fit: cover;
+  padding: 5px;
+}
+.listItem > h6 {
+  color: #000000;
+  text-align: right;
+  top: 20px;
+  right: 95px;
+  position: absolute;
+}
+
+.listItem:hover {
+  background-color: var(--light-orange);
+  border-color: var(--darke-orange);
+  color: white;
+}
+
+.licensePlate {
+  position: absolute;
+  bottom: 2px;
+  left: 7px;
+  text-align: center;
+}
+
+.licensePlateTop {
+  position: relative;
+  margin-bottom: 5px;
+}
+
+.licensePlateNumber {
+  font-size: 0.9rem;
+
+  text-align: left;
+  width: 100px;
+  display: inline-block;
+  padding: 0 3px;
+  background-color: #ffa412;
+  border: 1px solid #7e7e7e;
+  border-radius: 5px;
+}
+
+.licensePlateIran {
+  font-size: 0.5rem;
+  position: absolute;
+  top: 1px;
+  right: 0px;
+  color: #000000;
+  background-color: #ffa412;
+  padding: 0px;
+  border-radius: 0 5px 0 0;
+  width: 25px;
+  line-height: 0.8rem;
+  border-left: 1px solid #7e7e7e;
+  border-top: 1px solid #7e7e7e;
+  border-right: 1px solid #7e7e7e;
+}
+
+.right_pelak {
+  background-color: #ffa412;
+}
+
+.licensePlateBottom {
+  font-size: 0.5rem;
+  color: #ffa412;
+  background-color: #ffa412;
+  font-weight: bold;
+}
+
+.licensePlateIranBottom {
+  position: absolute;
+  bottom: 0px;
+  font-size: 0.7rem;
+  background-color: #ffa412;
+  padding: 0px;
+  right: 0px;
+  color: #000000;
+  border-radius: 0 0 5px 0;
+  line-height: 0.7rem;
+  width: 25px;
+  border-left: 1px solid #7e7e7e;
+  border-bottom: 1px solid #7e7e7e;
+  border-right: 1px solid #7e7e7e;
+}
+.requestsContainer {
+  margin-top: 20px;
+}
+
+.requestsList {
+  list-style-type: none;
+  padding: 0;
+}
+
+.requestItem {
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin-bottom: 10px;
+}

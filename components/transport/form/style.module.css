@@ -1,0 +1,53 @@
+/* استایل دکمه */
+.main{
+  background-color: var(--white);
+  width: 100%;
+  height: 100%;
+  padding: 5px;
+  border-radius: 6px;
+
+}
+.buttonPrimary {
+    display: block;
+    width: 100%;
+    padding: 10px 24px;
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    background-color: var(--ok) !important;
+    border: none;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    margin-bottom: 20px; /* فاصله پایین دکمه */
+  }
+  
+  .buttonPrimary:hover {
+    background-color: var(--ok-ok) !important;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  }
+  
+  .buttonPrimary:active {
+    background-color: var(--darked-orange) !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transform: translateY(2px);
+  }
+  
+  .buttonPrimary:focus {
+    outline: none !important;
+    box-shadow: 0 0 0 1px rgba(8, 8, 8, 0.5) !important; 
+  }
+  
+  /* استایل متن توضیحات */
+  .buttonDescription {
+    display: block;
+    font-size: 0.8rem;
+    color: #6c757d; /* رنگ متن توضیحات */
+    text-align: center;
+    margin-top: 4px; /* فاصله بالا متن توضیحات */
+    line-height: 1.4; /* فاصله خطوط متن توضیحات */
+  }
+  

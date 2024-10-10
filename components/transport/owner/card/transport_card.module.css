@@ -1,0 +1,358 @@
+/* src/components/transport_card.module.css */
+.wrapper {
+  display: grid;
+  direction: rtl;
+  gap: 0.3rem 1.1rem;
+  margin: 10px;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+}
+
+.transport_card {
+  border: 1px solid var(--dark-orange);
+  border-radius: 8px;
+  width: 100%;
+  max-width: 260px;
+  height: 150px;
+  cursor: pointer;
+  direction: rtl;
+  margin-right: 40px;
+  margin-bottom: 8px;
+  background-color: var(--white);
+  position: relative;
+  transition: box-shadow 0.3s, transform 0.3s;
+  padding: 10px;
+}
+
+.transport_card img {
+  width: 90px;
+  height: 90px;
+  border-radius: 11px;
+  border: 1px solid var(--dark-orange);
+  position: absolute;
+  top: 15%;
+  right: -17%;
+  transition: transform 0.4s ease-in-out;
+}
+
+.transport_card img::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: translateX(-100%);
+  transition: transform 0.4s ease-in-out;
+}
+
+.transport_card img:hover::after {
+  transform: translateX(100%);
+}
+
+.transport_card h1 {
+  font-size: 0.8rem;
+  text-align: right;
+  margin: 5px 0 5px 0;
+  padding-right: 18%;
+}
+
+.transport_card:hover {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transform: scale(1.005);
+}
+
+.category {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background-color: var(--dark-orange);
+  color: #000000;
+  padding: 3px 5px;
+  font-size: 0.7rem;
+  border-radius:0 5px 0 5px;
+  text-align: center;
+}
+
+.origin {
+  position: absolute;
+  bottom: 0;
+  min-width: 100px;
+  right: 0;
+  background-color:var(--light-orange);
+  color: #000000;
+  padding: 3px 5px;
+  font-size: 0.7rem;
+  border-radius: 5px 0 5px 0;
+  border-top: 1px solid var(--dark-orange);
+  border-left: 1px solid var(--dark-orange);
+  text-align: center;
+}
+
+.destination {
+  position: absolute;
+  min-width: 100px;
+  bottom: 0;
+  left: 0;
+  background-color: var(--light-orange);
+  border-top: 1px solid var(--dark-orange);
+  border-right: 1px solid var(--dark-orange);
+
+  padding: 3px 5px;
+  font-size: 0.7rem;
+  border-radius:0 5px 0 5px;
+  text-align: center;
+}
+
+.distance,
+.price {
+  padding: 1px 0;
+  font-size: 0.7rem;
+  text-align: right;
+  margin-right: 18%;
+  color: black;
+}
+
+.number_badge {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 30px;
+  height: 60px;
+  border-right: 1px solid var(--dark-orange);
+  border-bottom: 1px solid var(--dark-orange);
+  border-radius: 5px 0 9px 0;
+  background-color: var(--light-orange);
+  color: #000000;
+  text-align: center;
+  direction: rtl;
+}
+
+.text_number_badge {
+  position: absolute;
+  top: 20%;
+  left: 20%;
+  font-size: 0.8rem;
+  font-weight: bold;
+  text-align: center;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+
+.fillBtnOrange {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background-color: var(--dark-orange);
+  color: rgb(0, 0, 0);
+  padding: 8px 12px;
+  border-radius: 0px 8px 0px 5px;
+  cursor: pointer;
+  text-align: center;
+  font-size: 0.8rem;
+  transition: background-color 0.3s;
+}
+
+.fillBtnOrange:hover {
+  background-color: var(--ok);
+  color: rgb(255, 255, 255);
+}
+
+.licensePlate {
+  position: absolute;
+  top: 5px;
+  right: -44px;
+  text-align: center;
+}
+
+.licensePlateTop {
+  position: relative;
+  margin-bottom: 5px;
+}
+
+.licensePlateNumber {
+  font-size: 0.8rem;
+  font-weight: bold;
+  text-align: left;
+  width: 90px;
+  display: inline-block;
+  padding: 3px;
+  background-color: #ffa412;
+  border: 1px solid #000000;
+  border-radius: 5px 5px 0 0;
+}
+
+.licensePlateIran {
+  font-size: 0.3rem;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  color: #000000;
+  background-color: var(--dark-orange);
+  padding: 0px;
+  border-radius: 0 5px 0 0;
+  width: 25px;
+  border-left: 1px solid var(--black);
+  border-top: 1px solid var(--black);
+  border-right: 1px solid var(--black);
+}
+
+.right_pelak {
+  background-color: var(--dark-orange);
+}
+
+.licensePlateBottom {
+  font-size: 0.3rem;
+  line-height: 0.2rem;
+  color: var(--dark-orange);
+  background-color: var(--dark-orange);
+  font-weight: bold;
+}
+
+.licensePlateIranBottom {
+  position: absolute;
+  bottom: 0px;
+  font-size: 12px;
+  background-color: var(--dark-orange);
+  padding: 0px;
+  right: 0px;
+  color: #000000;
+  border-radius: 0 0 5px 0;
+  width: 25px;
+  border-left: 1px solid #000000;
+  border-bottom: 1px solid #000000;
+  border-right: 1px solid #000000;
+}
+
+.main_content{
+  margin-top: 20px;
+}
+
+.rtl_diection {
+  direction: rtl;
+}
+/* استایل دایره‌های در دسترس بودن */
+.availability_indicator {
+  position: relative;
+  width: 8px;
+  height: 8px;
+  float: left;
+  background-color: var(--light-green);
+  border-radius: 50%;
+  box-shadow: 0 0 3px var(--ok);
+  margin: -2px 28px; 
+  animation: pulse 2s infinite; /* انیمیشن بزرگ و کوچک شدن */
+ 
+}
+
+/* انیمیشن بزرگ و کوچک شدن دایره */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* استایل دایره داخلی */
+.availability_indicator::before {
+  content: "";
+  position: absolute;
+  top: 50%; /* مرکز دایره اصلی */
+  left: 50%; /* مرکز دایره اصلی */
+  width: 50%; /* اندازه دایره داخلی */
+  height: 50%; /* اندازه دایره داخلی */
+  background-color: var(--ok); /* رنگ دایره داخلی */
+  border-radius: 50%; /* گرد کردن دایره داخلی */
+  transform: translate(-50%, -50%); /* مرکز دایره داخلی در مرکز دایره اصلی */
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.4);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes pulse-slow {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.3);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+
+@media (max-width: 1400px) {
+  .wrapper {
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .wrapper {
+    grid-template-columns: 1fr;
+  }
+}
+
+.noRequestContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 50vh;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.noRequestImage {
+  width: 250px;
+  height: 250px;
+  object-fit: cover;
+  margin-bottom: 20px;
+}
+
+.noRequestText {
+  font-size: 1.5rem;
+  color: #333;
+  font-weight: bold;
+  background: linear-gradient(90deg, #ff6f61, #debb71);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  padding: 10px;
+  border-radius: 8px;
+}
+.placeTimer{
+  width: 74px;
+  height: 40px;
+  color: var(--dark-orange) !important;
+  position: absolute;
+  left: 20px;
+  bottom: 15px;
+  
+}
+.timer > timerContainer{
+  direction: ltr !important;
+  
+}

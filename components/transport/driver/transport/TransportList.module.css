@@ -1,0 +1,148 @@
+/* right.module.css */
+.tbazar {
+  padding-top: 10px;
+  margin-bottom: 10px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  text-align: center !important;
+}
+
+
+.custom_dir {
+ 
+  padding: 1px;
+  border-radius: 4px;
+}
+
+
+.boxCardSingle {
+  position: relative;
+  height: 90px;
+  display: flex;
+  align-items: center;
+  border-radius: 8px;
+  box-shadow: 0 1px 1px rgba(0,0,0,0.1), 
+  0 2px 4px rgba(172, 172, 172, 0.1);
+  direction: rtl;
+  margin: 10px;
+  box-sizing: border-box;
+  background-color: #ffffff;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+  
+}
+
+.boxCardSingle:hover {
+  background-color: #f7f7f7;
+}
+.pp {
+  text-align: center;
+  font-size: 0.8rem;
+  }
+  
+.boxCardInner {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.productImage {
+  width: 80px;
+  height: 80px;
+  background-color: #bdbdbd;
+  margin-right: 5px;
+  margin-left: 5px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.productDetails {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
+}
+
+.productName {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.productPrice {
+  color: orange;
+  font-weight: bold;
+  font-size: 0.7rem;
+}
+
+.title2 {
+  color: rgb(120, 120, 120);
+  font-size: 0.7rem;
+}
+
+.productBadge {
+  padding: 1px 10px;
+  border-radius: 5px;
+  text-align: center;
+  color: white;
+  font-size: 0.6rem;
+
+  align-self: flex-end;
+  margin-left: 7px;
+}
+
+.active {
+  background-color: var(--ok);  /* سبز */
+}
+
+.inactive {
+  background-color: var(--dark-red);  /* قرمز */
+}
+
+.buttonContainer {
+  position: absolute;
+  left: 7px;
+  top: 7px;
+  display: flex;
+  gap: 0px;
+  line-height: 0.6rem;
+  font-size: 0.7rem;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.boxCardSingle:hover .buttonContainer {
+  opacity: 1;
+}
+
+.buttonContainer button {
+  padding: 1px 10px;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.deleteButton {
+  background-color: var(--dark-red);
+  color: white;
+  border: none;
+
+}
+
+.deleteButton:hover {
+  background-color: var(--darked-red);
+}
+
+.payButton {
+  background-color: orange;
+  color: white;
+  border: none;
+}
+
+.payButton:hover {
+  background-color: green;
+  border-radius: 5px;
+}

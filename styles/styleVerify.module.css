@@ -1,0 +1,126 @@
+/* verify.module.css */
+
+.verify_wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+  direction: ltr;
+}
+
+.verify_container {
+  border: 1px solid var(--light-orange);
+  border-radius: 8px;
+  width: 400px;
+  padding: 20px;
+  text-align: center;
+
+  position: relative;
+}
+
+.verify_container:hover {
+  background-color: var(--gray);
+  border: 1px solid var(--dark-green);
+}
+
+.logo {
+  width: 50px;
+  height: 50px;
+  margin-bottom: 20px;
+}
+
+.verify_container h1 {
+  font-size: 1.2rem;
+  margin-bottom: 40px;
+  color: var(--black);
+}
+
+.timer {
+  font-size: 0.9rem;
+  color: var(--dark-red); /* استفاده از رنگ متغیر */
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.code_container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  direction: ltr;
+}
+
+.code_input {
+  width: 40px;
+  height: 40px;
+  direction: ltr;
+  text-align: center;
+  font-size: 1.5rem;
+  border: 1px solid var(--dark-orange);
+  border-radius: 5px;
+  outline: none;
+}
+
+.verify_container:hover .code_input {
+  color: var(--darked-green);
+  border: 1px solid var(--dark-green);
+}
+
+.verify_container button {
+  width: calc(60%);
+  padding: 5px 10px;
+  margin-top: 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--dark-green);
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.verify_container button:hover {
+  background-color: var(--darked-green);
+}
+
+.toast {
+  position: absolute;
+  top: -40%; /* مرکز عمودی */
+  left: 0%; /* مرکز افقی */
+  width: 100%;
+  padding: 10px 20px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-size: 1rem;
+  animation: fadeInOut 3s forwards;
+  text-align: center;
+}
+
+.toast.error {
+  background-color: var(--dark-red); /* استفاده از رنگ متغیر */
+  color: var(--white);
+}
+
+.toast.success {
+  background-color: var(--dark-green); /* استفاده از رنگ متغیر */
+  color: var(--white);
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+    transform: translateY(-100px);
+  }
+  10% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  90% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-100px);
+  }
+}

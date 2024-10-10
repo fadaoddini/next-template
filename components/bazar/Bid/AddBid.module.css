@@ -1,0 +1,132 @@
+/* AddBid.module.css */
+
+.modalOverlay {
+  background-color: rgba(0, 0, 0, 0.75);
+  position: fixed;
+  top: -30%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modalContent {
+  background-color: var(--background); /* پس‌زمینه مودال */
+  border-radius: 8px;
+  padding: 20px;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  box-shadow: 0 4px 10px var(--card-shadow);
+  color: var(--foreground); /* رنگ متن */
+}
+
+.header {
+  font-size: 1.1rem;
+  color: var(--black);
+  margin-bottom: 5px;
+  text-align: center;
+  padding-bottom: 15px;
+  border-bottom: 1px solid var(--darked-orange);
+}
+.header span {
+    font-size: 0.9rem;
+    color: var(--darked-orange);
+    margin: 0 10px;
+}
+.inputContainer {
+  margin-bottom: 15px;
+}
+
+.inputLabel {
+    font-size: 0.9rem;
+    color: var(--darked-orange);
+    margin: 0 10px 10px 0;
+    min-width: 210px;
+    display: inline-block;
+}
+
+.inputField {
+
+  padding: 10px;
+    direction: ltr;
+  border: 1px solid var(--gray); /* استفاده از خاکستری */
+  border-radius: 4px;
+  background-color: var(--card-bg); /* پس‌زمینه کارت */
+  color: var(--foreground); /* رنگ متن */
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 60px;
+ direction: ltr;
+}
+
+.submitButton {
+  background-color: var(--button-bg-fallow); /* استفاده از رنگ نارنجی */
+  color: var(--white); /* رنگ متن دکمه */
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.submitButton:hover {
+  background-color: var(--ok); /* تغییر رنگ هنگام هاور */
+}
+
+.submitButton2 {
+    background-color: var(--button-bg-fallow); /* استفاده از رنگ نارنجی */
+    color: var(--white); /* رنگ متن دکمه */
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+
+  }
+  
+  .submitButton2:hover {
+    background-color: var(--ok); /* تغییر رنگ هنگام هاور */
+  }
+  
+.closeButton {
+  background-color: var(--btn-bg); /* رنگ پس‌زمینه برای دکمه بستن */
+  color: var(--white);
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.closeButton:hover {
+  background-color: var(--btn-bg-hover); /* تغییر رنگ هنگام هاور */
+}
+
+.title{
+    font-size: 0.8rem;
+    background-color:var(--gray);
+    border-radius: 5px ;
+    margin-top: 5px;
+    padding: 10px;
+
+}
+
+.p2 {
+    font-size:0.9rem;
+    color: var(--black);
+    text-align: center;
+    padding-bottom: 5px;
+    margin-bottom: 40px;
+    border-bottom: 1px solid var(--darked-orange);
+}
+.p2 span {
+    font-size: 1.1rem;
+    color: var(--darked-orange);
+    margin: 0 5px;
+    font-weight: bold;
+}
