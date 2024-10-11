@@ -1,3 +1,4 @@
+// MarketChart.js
 import React, { useState, useMemo } from "react";
 import { Line } from "react-chartjs-2";
 import {
@@ -14,7 +15,6 @@ import {
 import moment from "moment-jalaali";
 import styles from "./MarketChart.module.css";
 
-// Registering required components for Chart.js
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -26,14 +26,19 @@ ChartJS.register(
   Legend
 );
 
-const MarketChart = ({ data }) => {
-  const [timeRange, setTimeRange] = useState("7"); // Default to 7 days
+// تابع برای فرمت‌دهی عددی
+const formatNumber = (number, unit) => {
+  if (number === null || number === undefined) return "داده موجود نیست";
+  return new Intl.NumberFormat("fa-IR").format(number) + (unit ? ` ${unit}` : "");
+};
 
-  // Filter data based on time range
+const MarketChart = ({ data }) => {
+  const [timeRange, setTimeRange] = useState("7");
+
   const getFilteredData = (range) => {
     const now = moment();
     return data.filter((item) => {
-      const date = moment(item.date, "YYYY-MM-DD"); // Assuming dates are in ISO format
+      const date = moment(item.date, "YYYY-MM-DD");
       return now.diff(date, "days") <= range;
     });
   };
@@ -43,84 +48,66 @@ const MarketChart = ({ data }) => {
     [timeRange, data]
   );
 
-  // Transforming data into Chart.js format
   const dates = filteredData.map((item) =>
     moment(item.date).format("jYYYY/jMM/jDD")
   );
-  const maxPrices = filteredData.map((item) => item.maxPrice);
-  const minPrices = filteredData.map((item) => item.minPrice);
-  const volumes = filteredData.map((item) => item.volume);
-  const averagePrices = filteredData.map(
-    (item) => (item.maxPrice + item.minPrice) / 2
-  );
-  // دسترسی به متغیرهای CSS
-  const rootStyles = getComputedStyle(document.documentElement);
 
-  const redColor = rootStyles.getPropertyValue("--chart-red");
-  const redColorDark = rootStyles.getPropertyValue("--chart-red-dark");
-  const greenColor = rootStyles.getPropertyValue("--chart-green");
-  const greenColorDark = rootStyles.getPropertyValue("--chart-green-dark");
-  const blueColor = rootStyles.getPropertyValue("--chart-blue");
-  const blackColor = rootStyles.getPropertyValue("--chart-black");
+  const maxSellPrices = filteredData.map((item) => item.maxPriceSell ?? null);
+  const minSellPrices = filteredData.map((item) => item.minPriceSell ?? null);
+  const maxBuyPrices = filteredData.map((item) => item.maxPriceBuy ?? null);
+  const minBuyPrices = filteredData.map((item) => item.minPriceBuy ?? null);
+  const volumes = filteredData.map((item) => item.volume ?? null);
 
-  const chartData = {
+  const chartColors = {
+    redColor: "#ec7063",
+    redColorDark: "#c0392b",
+    greenColor: "#52be80",
+    greenColorDark: "#239b56",
+    blueColor: "#e5e7e9",
+  };
+
+  const dataChart = {
     labels: dates,
     datasets: [
       {
-        label: "بالاترین قیمت",
-        data: maxPrices.map((price, index) => ({ x: dates[index], y: price })),
-        backgroundColor: greenColor.trim(),
-        borderColor: greenColorDark.trim(),
+        label: "بالاترین قیمت فروش",
+        data: maxSellPrices,
+        borderColor: chartColors.redColor,
+        backgroundColor: "rgba(255, 0, 0, 0.2)",
+        fill: true,
+      },
+      {
+        label: "پایین‌ترین قیمت فروش",
+        data: minSellPrices,
+        borderColor: chartColors.redColorDark,
+        backgroundColor: "rgba(255, 0, 0, 0.2)",
+        fill: true,
+      },
+      {
+        label: "بالاترین قیمت خرید",
+        data: maxBuyPrices,
+        borderColor: chartColors.greenColor,
+        backgroundColor: "rgba(0, 255, 0, 0.2)",
+        fill: true,
+      },
+      {
+        label: "پایین‌ترین قیمت خرید",
+        data: minBuyPrices,
+        backgroundColor: chartColors.greenColorDark,
+        borderColor: chartColors.greenColorDark,
         borderWidth: 2,
         pointRadius: 4,
-        showLine: false,
-        type: "scatter",
-      },
-      {
-        label: "پایین‌ترین قیمت",
-        data: minPrices.map((price, index) => ({ x: dates[index], y: price })),
-        backgroundColor: redColor.trim(),
-        borderColor: redColorDark.trim(),
-        borderWidth: 2,
-        pointRadius: 4,
-        showLine: false,
-        type: "scatter",
-      },
-      {
-        label: "میانگین قیمت",
-        data: averagePrices.map((price, index) => ({
-          x: dates[index],
-          y: price,
-        })),
-        backgroundColor: blackColor.trim(),
-        borderColor: blackColor.trim(),
-        borderWidth: 1,
-        pointRadius: 4,
-        showLine: false,
-        type: "scatter",
-      },
-      {
-        label: "میانگین قیمت (خط شیشه‌ای)",
-        data: averagePrices.map((price, index) => ({
-          x: dates[index],
-          y: price,
-        })),
-        borderColor: "rgba(0, 0, 0, 0.2)", // شیشه‌ای
-        borderWidth: 4,
-        pointRadius: 0, // مخفی کردن نقاط
+        pointStyle: "rect",
         showLine: true,
-        tension: 0.3, // نرمی خط
+        type: "scatter",
       },
       {
-        label: "حجم بازار",
-        data: volumes.map((volume, index) => ({ x: dates[index], y: volume })),
-        backgroundColor: blueColor.trim(),
-        borderColor: blueColor.trim(),
-        borderWidth: 1,
         type: "bar",
-        barThickness: 20, // Increase bar thickness
-        categoryPercentage: 1.0, // Full width bars
-        barPercentage: 1.0, // No gap between bars
+        label: "حجم بازار",
+        data: volumes,
+        backgroundColor: chartColors.blueColor,
+        borderColor: chartColors.blueColor,
+        borderWidth: 1,
       },
     ],
   };
@@ -132,52 +119,46 @@ const MarketChart = ({ data }) => {
         position: "top",
         labels: {
           font: {
-            family: "IranSans", // فونت دلخواه برای لیبل‌های راهنمای نمودار
-            size: 11, // اندازه فونت
-            weight: "bold", // ضخامت فونت
-            lineHeight: 1, // فاصله بین خطوط
+            family: "IranSans", // فونت legend
+            size: 12,
+            weight: "bold",
           },
-          color: "#333", // رنگ فونت
+          color: "#333",
         },
       },
       tooltip: {
         callbacks: {
           label: function (tooltipItem) {
-            if (tooltipItem.dataset.type === "bar") {
-              return `حجم بازار: ${tooltipItem.raw.y}`;
-            }
-            return `${tooltipItem.dataset.label}: ${tooltipItem.raw.y}`;
+            const unit = tooltipItem.dataset.label === "حجم بازار" ? "کیلوگرم" : "تومان";
+            const value = formatNumber(tooltipItem.raw, unit); // استفاده از تابع فرمت‌دهی با واحد مناسب
+            return `${tooltipItem.dataset.label}: ${value}`;
           },
         },
-        titleFont: {
-          family: "IranSans", // فونت برای عنوان‌های tooltip
+        bodyFont: {
+          family: "IranSans", // فونت body tooltip
           size: 12,
         },
-        bodyFont: {
-          family: "IranSans", // فونت برای بدنه tooltip
-          size: 12,
+        titleFont: {
+          family: "IranSans", // فونت title tooltip
+          size: 14,
         },
       },
     },
     scales: {
       x: {
-        type: "category",
-        position: "bottom",
         title: {
           display: true,
           text: "تاریخ",
           font: {
-            family: "IranSans", // فونت برای عنوان محور x
+            family: "IranSans", // فونت عنوان محور X
             size: 14,
-            weight: "bold",
           },
         },
         ticks: {
           font: {
-            family: "IranSans", // فونت برای اعداد محور x
+            family: "IranSans", // فونت اعداد محور X
             size: 12,
           },
-          color: "#666", // رنگ فونت اعداد محور x
         },
       },
       y: {
@@ -185,43 +166,32 @@ const MarketChart = ({ data }) => {
           display: true,
           text: "قیمت / حجم",
           font: {
-            family: "IranSans", // فونت برای عنوان محور y
+            family: "IranSans", // فونت عنوان محور Y
             size: 14,
-            weight: "bold",
           },
         },
         ticks: {
           font: {
-            family: "IranSans", // فونت برای اعداد محور y
+            family: "IranSans", // فونت اعداد محور Y
             size: 12,
           },
-          color: "#666", // رنگ فونت اعداد محور y
         },
       },
     },
+    spanGaps: true,
   };
 
   return (
     <div className={styles.chartContainer}>
-      <div className={styles.buttons}>
-        <button
-          className={`${styles.button} ${
-            timeRange === "7" ? styles.active : ""
-          }`}
-          onClick={() => setTimeRange("7")}
-        >
-          7 روز
+      <div className={styles.buttonContainer}>
+        <button onClick={() => setTimeRange("7")} className={timeRange === "7" ? styles.active : ""}>
+          7 روز گذشته
         </button>
-        <button
-          className={`${styles.button} ${
-            timeRange === "30" ? styles.active : ""
-          }`}
-          onClick={() => setTimeRange("30")}
-        >
-          30 روز
+        <button onClick={() => setTimeRange("30")} className={timeRange === "30" ? styles.active : ""}>
+          30 روز گذشته
         </button>
       </div>
-      <Line data={chartData} options={options} />
+      <Line data={dataChart} options={options} />
     </div>
   );
 };

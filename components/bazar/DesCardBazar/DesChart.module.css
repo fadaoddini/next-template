@@ -29,10 +29,10 @@
 }
 
 .title {
-  font-size: 1.2rem; /* اندازه فونت عنوان */
+  font-size: 0.9rem; /* اندازه فونت عنوان */
   margin: 0; /* حذف فاصله خارجی */
   font-weight: bold; /* ضخیم کردن فونت */
-  text-align: right; /* تراز کردن متن به سمت راست */
+  text-align: center; /* تراز کردن متن به سمت راست */
 }
 
 .description_chart {
@@ -41,5 +41,5 @@
   margin: 10px 0; /* فاصله بالا و پایین */
   text-align: justify; /* تراز کردن متن به صورت justify */
   direction: rtl; /* راست به چپ */
-  text-align-last: right; /* تراز کردن آخرین خط به سمت راست */
+  text-align-last: center; /* تراز کردن آخرین خط به سمت راست */
 }

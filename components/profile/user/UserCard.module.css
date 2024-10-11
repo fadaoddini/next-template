@@ -1,96 +1,130 @@
 .card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border-radius: 5px;
-    padding: 5px 5px 20px 5px;
-    margin: 7px 0;
-    width: 100%;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    background-color: #fff;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 5px;
+  padding: 5px 5px 20px 5px;
+  margin: 7px 0;
+  width: 100%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  background-color: #fff;
+}
+
+.imageContainer {
   
-  .imageContainer {
-    width: 80px;
-    height: 80px;
-    margin-top: 20px;
-    border-radius: 50%;
-    overflow: hidden;
-    margin-bottom: 10px;
-  }
+  width: 80px;
+  height: 80px;
+  margin-top: 20px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.image {
   
-  .image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  
-  .name {
-    font-size: 16px;
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
-  
-  .buttons {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-  }
-  
-  .button_follow {
-    background-color: var(--button-bg-fallow, #0070f3);
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    width: 100%;
-    padding: 5px 16px;
-    margin: 5px;
-    cursor: pointer;
-    font-size: 14px;
-  }
-  .button_fallow:hover {
-    background-color: var(--button-bg-fallow-hover, #0070f3);
-    color: var(--darked-red, #0070f3);
-    border: 1px solid var(--darked-red);
-  }
-  
-  
-  .button_unfollow {
-    background-color: var(--button-bg-un-fallow, #0070f3);
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    width: 100%;
-    padding: 5px 16px;
-    margin: 5px;
-    cursor: pointer;
-    font-size: 14px;
-  }
-  .button_unfollow:hover {
-    background-color: var(--button-bg-un-fallow-hover, #0070f3);
-    color: var(--darked-red, #0070f3);
-    border: 1px solid var(--darked-red);
-  }
-  
-  .button_sms {
-    background-color: var(--button-bg-sms, #0070f3);
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    width: 100%;
-    padding: 5px 16px;
-    margin: 5px;
-    cursor: pointer;
-    font-size: 14px;
-  }
-  .button_sms:hover {
-    background-color: var(--button-bg-sms-hover, #0070f3);
-    color: var(--darked-green, #0070f3);
-    border: 1px solid var(--darked-green);
-  }
-  
-  .button + .button {
-    margin-left: 10px;
-  }
-  
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.main_img{
+  position: relative; /* اینجا تغییر موقعیت را فعال می‌کنیم */
+}
+.cameraIcon {
+  position: absolute;
+  bottom: 10px;
+  left: 0px;
+  width: 25px;
+  height: 25px;
+  background-color: white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+.cameraIcon:hover {
+background-color: var(--darked-orange);
+}
+.name {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.button_follow {
+  background-color: var(--button-bg-fallow, #0070f3);
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  width: 100%;
+  padding: 5px 16px;
+  margin: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+.button_fallow:hover {
+  background-color: var(--button-bg-fallow-hover, #0070f3);
+  color: var(--darked-red, #0070f3);
+  border: 1px solid var(--darked-red);
+}
+
+.button_unfollow {
+  background-color: var(--button-bg-un-fallow, #0070f3);
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  width: 100%;
+  padding: 5px 16px;
+  margin: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+.button_unfollow:hover {
+  background-color: var(--button-bg-un-fallow-hover, #0070f3);
+  color: var(--darked-red, #0070f3);
+}
+
+.button_sms {
+  background-color: var(--button-bg-sms, #0070f3);
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  width: 100%;
+  padding: 5px 16px;
+  margin: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+.button_sms:hover {
+  background-color: var(--button-bg-sms-hover, #0070f3);
+  color: var(--black, #0070f3);
+}
+
+.button + .button {
+  margin-left: 10px;
+}
+.stats {
+  display: flex;
+  justify-content: space-around; /* فاصله‌گذاری مناسب بین آیتم‌ها */
+  margin-top: 10px;
+}
+
+.statItem {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+}
+
+.icon {
+  margin-right: 5px;
+  font-size: 18px;
+}

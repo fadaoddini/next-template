@@ -92,6 +92,7 @@
   align-items: center;
   width: 34px;
   height: 34px;
+  cursor: pointer;
   margin: auto 2px;
   transition: background-image 0.3s ease-in-out;
   background-size: cover;

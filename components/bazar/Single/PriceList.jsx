@@ -3,7 +3,7 @@ import styles from './PriceList.module.css'; // استایل‌ها را از ف
 import formatNumber from '@/components/utils/FormatNumber/formatNumber';
 
 
-const PriceList = ({ items, color }) => {
+const PriceList = ({ items, color, lable }) => {
   const backgroundColor =
     color === "buy" ? "var(--dark-green)" : "var(--dark-red)";
   const backgroundColorHover =
@@ -21,7 +21,9 @@ const PriceList = ({ items, color }) => {
         "--text-attr": textColorAttr,
         cursor: "pointer",
       }}>
-        <h3 className={styles.h_title}>لیست درخواست های باز </h3>
+        <h3 className={styles.h_title}>
+        {color === "sell" ? `فروشندگان خرمای ${lable} ` : `خریداران خرمای ${lable} `}
+           </h3>
       <div className={styles.header}>
         
         <div className={styles.cell}>قیمت (تومان)</div>

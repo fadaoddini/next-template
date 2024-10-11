@@ -4,7 +4,7 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.8);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -14,7 +14,7 @@
 .dialog {
   background-color: #fff;
   padding: 50px;
-  border: 1px solid #ff9800; /* تم نارنجی */
+  border: none; /* تم نارنجی */
   border-radius: 8px;
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
   width: 400px;
@@ -44,6 +44,9 @@
 .confirmButton {
   background-color: #ff9800; /* تم نارنجی */
   color: #fff;
+  border: none;
+  line-height: 2rem;
+  cursor: pointer;
   border-radius: 5px;
   width: 40%;
 }
@@ -55,6 +58,9 @@
 .cancelButton {
   background-color: #ccc;
   color: #333;
+  cursor: pointer;
+  border: none;
+  line-height: 2rem;
   border-radius: 5px;
   width: 40%;
 }

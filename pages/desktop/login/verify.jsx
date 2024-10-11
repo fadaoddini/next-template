@@ -1,128 +1,107 @@
 import { useState, useEffect } from "react";
-
 import { useRouter } from "next/router";
-
-import { useAuth } from "@/context/AuthContext";
-
+import { useAuth } from "@/context/AuthContext"; // اطمینان حاصل کنید که این Context را ایجاد کرده‌اید
 import axios from "axios";
-
-import styles from "../../../styles/styleVerify.module.css";
- // وارد کردن استایل
+import styles from "../../../styles/styleVerify.module.css"; // وارد کردن استایل
 import Config from "config/config";
-
 import Image from "next/image";
 
-
 const Verify = () => {
-  const { authStatus, setAuthStatus } = useAuth();
- // وضعیت احراز هویت
+  const { authStatus, setAuthStatus } = useAuth(false); // وضعیت احراز هویت
   const router = useRouter();
-
-  const { mobile } = router.query;
- // دریافت شماره موبایل از query
-
+  const { mobile } = router.query; // دریافت شماره موبایل از query
   const [code, setCode] = useState(["", "", "", ""]);
-
   const [toast, setToast] = useState({ message: "", type: "" });
+  const [timeLeft, setTimeLeft] = useState(120); // 2 دقیقه معادل 120 ثانیه
 
-  const [timeLeft, setTimeLeft] = useState(120);
- // 2 دقیقه معادل 120 ثانیه
-
-  // هدایت به صفحه بازار در صورت ورود
   useEffect(() => {
+    console.log("authStatus in Verify:", authStatus); // بررسی وضعیت
     if (authStatus) {
       router.push("/bazar");
-
     }
   }, [authStatus, router]);
 
+  // تنظیم تایمر
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTimeLeft((prevTime) => {
+        if (prevTime <= 0) {
+          clearInterval(timer);
+          setToast({ message: "زمان شما به پایان رسید.", type: "error" });
+          router.push("/login"); // هدایت به صفحه ورود بعد از پایان زمان
+          return 0; // متوقف کردن تایمر
+        }
+        return prevTime - 1;
+      });
+    }, 1000);
+
+    return () => clearInterval(timer); // پاک کردن تایمر در هنگام Unmount
+  }, []);
 
   const handleChange = (e, index) => {
     const value = e.target.value;
 
     if (/^\d$/.test(value)) {
       const newCode = [...code];
-
       newCode[index] = value;
-
-
       setCode(newCode);
-
 
       // فوکوس به خانه بعدی
       if (index < 3) {
         document.getElementById(`code-input-${index + 1}`).focus();
-
       }
     }
   };
-
 
   const handleKeyDown = (e, index) => {
     if (e.key === "Backspace") {
       const newCode = [...code];
-
       newCode[index] = "";
-
       setCode(newCode);
 
       if (index > 0) {
         document.getElementById(`code-input-${index - 1}`).focus();
-
       }
     }
   };
-
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+  
     const enteredCode = code.join("");
- // کد وارد شده را از آرایه به یک رشته تبدیل می‌کند
     if (enteredCode.length !== 4) {
       setToast({ message: "لطفاً کد ۴ رقمی را وارد کنید.", type: "error" });
-
       return;
- // در صورت نادرست بودن کد، تابع خاتمه می‌یابد
     }
-
+  
     try {
       const response = await axios.post(
-        Config.getApiUrl("login", "verifyCode"), // آدرس API برای تأیید کد
-        { mobile: mobile, code: enteredCode }, // داده‌های ارسال شده
+        Config.getApiUrl("login", "verifyCode"),
+        { mobile: mobile, code: enteredCode },
         {
           headers: { "Content-Type": "application/json" },
-          withCredentials: true, // ارسال کوکی‌ها
+          withCredentials: true,
         }
       );
-
-
+  
       if (response.status === 200) {
         console.log("پاسخ دریافتی:", response.data);
- // بررسی پاسخ دریافتی
-        setAuthStatus(true);
- // این خط را اضافه کنید
-        // توکن‌ها در کوکی‌ها ذخیره شده‌اند، نیازی به ذخیره مجدد آنها نیست
-        router.push("/bazar");
- // هدایت به صفحه بازار
+        setAuthStatus(true); // فقط پس از موفقیت کد، تغییر وضعیت احراز هویت
       } else {
         setToast({
-          message: response.data.message || "کد تأیید نادرست است.", // نمایش پیام خطا در صورت نادرست بودن کد
+          message: response.data.message || "کد تأیید نادرست است.",
           type: "error",
         });
-
       }
     } catch (error) {
       console.error("Error:", error);
- // ثبت خطا در کنسول
       setToast({
-        message: "خطایی رخ داده است، لطفاً دوباره تلاش کنید.", // نمایش پیام خطا برای کاربر
+        message: "خطایی رخ داده است، لطفاً دوباره تلاش کنید.",
         type: "error",
       });
-
     }
   };
-
+  
 
   return (
     <div className={styles.verify_wrapper}>
@@ -170,9 +149,6 @@ const Verify = () => {
       </div>
     </div>
   );
-
 };
 
-
 export default Verify;
-

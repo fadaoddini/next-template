@@ -1,110 +1,84 @@
 import { useState, useEffect } from "react";
-
 import axios from "axios";
-
 import { useRouter } from "next/router";
-
 import Cookies from "js-cookie";
- // اضافه کردن js-cookie
 import Config from "config/config";
-
 import Image from "next/image";
-
 import styles from "../../../styles/styleLogin.module.css";
- // وارد کردن استایل
 
 const Login = () => {
   const [mobile, setMobile] = useState("");
-
   const [toast, setToast] = useState({ message: "", type: "" });
-
+  const [waitTime, setWaitTime] = useState(0); // اضافه کردن وضعیت زمان انتظار
   const router = useRouter();
 
-
   useEffect(() => {
-    const accessToken = Cookies.get("access_token");
-
+    const accessToken = Cookies.get("accessToken");
 
     if (accessToken) {
       axios
-        .get(Config.getApiUrl("v1", "checkToken"), {
-          withCredentials: true,
-        })
+        .get(Config.getApiUrl("login", "checkToken"), { withCredentials: true })
         .then((response) => {
           if (response.data.status === "success") {
-            console.log("توکن معتبر است");
-
             router.push("/");
- // هدایت به صفحه اصلی
           } else {
             handleInvalidToken();
-
           }
         })
         .catch((error) => {
           console.error("خطا در اعتبارسنجی توکن:", error);
-
           handleInvalidToken();
-
         });
-
     } else {
       router.push("/login");
-
     }
   }, []);
 
-
   const handleInvalidToken = () => {
-    Cookies.remove("access_token");
-
+    Cookies.remove("accessToken");
     router.push("/login");
-
   };
 
-  
   const handleChange = (e) => {
     const value = e.target.value;
-
     if (toast.message) {
       setToast({ message: "", type: "" });
-
     }
     if (/^\d{0,9}$/.test(value)) {
       setMobile(value);
-
     }
   };
-
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     const mobileNumber = "09" + mobile;
-
     const mobileRegex = /^09\d{9}$/;
-
 
     if (!mobileRegex.test(mobileNumber)) {
       setToast({
         message: 'شماره موبایل باید با "09" شروع شود و 11 رقم باشد.',
         type: "error",
       });
-
       return;
+    }
 
+    if (waitTime > 0) {
+      setToast({
+        message: `لطفاً ${waitTime} ثانیه دیگر منتظر بمانید.`,
+        type: "error",
+      });
+      return;
     }
 
     try {
       const response = await axios.post(
-        Config.getApiUrl("login", "sendOtp"), // استفاده از تابع getApiUrl
+        Config.getApiUrl("login", "sendOtp"),
         { mobile: mobileNumber },
         { headers: { "Content-Type": "application/json" } }
       );
 
-
-      const { status } = response.data;
-
+      const { status, wait_time } = response.data; // زمان انتظار را از پاسخ دریافت می‌کنیم
 
       if (status === "ok") {
         setToast({
@@ -113,28 +87,36 @@ const Login = () => {
         });
 
         router.push({
-          pathname: '/verify',
-          query: { mobile: mobileNumber }
+          pathname: "/verify",
+          query: { mobile: mobileNumber },
         });
-
       } else {
+        // در صورت عدم موفقیت در ارسال OTP
         setToast({
-          message: "مشکلی پیش آمده است. لطفاً دوباره تلاش کنید.",
+          message: "متأسفانه، ارسال کد تأیید ناموفق بود. لطفاً دوباره تلاش کنید.",
           type: "error",
         });
-
+        setWaitTime(wait_time); // زمان انتظار را از پاسخ API تنظیم می‌کنیم
       }
     } catch (error) {
       console.error("Error:", error);
-
       setToast({
         message: "خطایی رخ داده است، لطفاً دوباره تلاش کنید.",
         type: "error",
       });
-
     }
   };
 
+  // این بخش برای مدیریت تایمر است
+  useEffect(() => {
+    let timer;
+    if (waitTime > 0) {
+      timer = setInterval(() => {
+        setWaitTime((prev) => prev - 1);
+      }, 1000);
+    }
+    return () => clearInterval(timer);
+  }, [waitTime]);
 
   return (
     <div className={styles.container}>
@@ -145,7 +127,7 @@ const Login = () => {
               <Image
                 src="/images/logo.png"
                 alt="rebo"
-                className={styles.logo} 
+                className={styles.logo}
                 width={100}
                 height={100}
               />
@@ -177,15 +159,17 @@ const Login = () => {
                   {toast.message}
                 </div>
               )}
+              {waitTime > 0 && (
+                <div className={styles.wait_message}>
+                  لطفاً تا {waitTime} ثانیه دیگر منتظر بمانید.
+                </div>
+              )}
             </div>
           </div>
         </div>
       </div>
     </div>
   );
-
 };
 
-
 export default Login;
-

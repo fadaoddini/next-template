@@ -3,7 +3,7 @@ import styles from './QueueList.module.css'; // استایل‌ها را از ف
 import formatNumber from '@/components/utils/FormatNumber/formatNumber';
 
 
-const QueueList = ({ items, color, title }) => {
+const QueueList = ({ items, color, title, catName }) => {
   const backgroundColor =
     color === "buy" ? "var(--dark-green)" : "var(--dark-red)";
   const backgroundColorHover =
@@ -21,22 +21,20 @@ const QueueList = ({ items, color, title }) => {
         "--text-attr": textColorAttr,
         cursor: "pointer",
       }}>
-        <h3 className={styles.h_title}>{title} </h3>
+        <h3 className={styles.h_title}>{title} {`${catName.name} ${catName.title}`} </h3>
       <div className={styles.header}>
         
         <div className={styles.cell}>قیمت (تومان)</div>
         <div className={styles.cell}>مقدار (kg)</div>
         <div className={styles.cell}>کل (تومان)</div>
-        <div className={styles.cell}>برترین پیشنهاد (تومان)</div>
-        <div className={styles.cell}>کل  (تومان)</div>
+
       </div>
       {items.map((item, index) => (
         <div key={index} className={styles.row}>
           <div className={styles.cell}>{formatNumber(item.price)}</div>
           <div className={styles.cell}>{formatNumber(item.quantity)}</div>
           <div className={styles.cell}>{formatNumber(item.total)}</div>
-          <div className={styles.cell}>{formatNumber(item.price)}</div>
-          <div className={styles.cell}>{formatNumber(item.total)}</div>
+
         </div>
       ))}
     </div>

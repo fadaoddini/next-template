@@ -1,23 +1,17 @@
 import Image from "next/image";
-import Link from "next/link"; // ایمپورت Link از next/link
+import Link from "next/link";
 import styles from "./ProductCard.module.css";
 import formatNumber from '@/components/utils/FormatNumber/formatNumber';
-
 import CountdownTimer from "@/components/utils/timer/CountdownTimer";
 
-const ProductCard = ({ color, url }) => {
-  const backgroundColor =
-    color === "buy" ? "var(--dark-green)" : "var(--dark-red)";
-  const backgroundColorHover =
-    color === "buy" ? "var(--light-green)" : "var(--light-red)";
+const ProductCard = ({ color, url, title, description, price, top_price_bid, weight, packaging, imageSrc, finished_time }) => {
+  const backgroundColor = color === "buy" ? "var(--dark-green)" : "var(--dark-red)";
+  const backgroundColorHover = color === "buy" ? "var(--light-green)" : "var(--light-red)";
   const textColor = color === "buy" ? "var(--dark-green)" : "var(--dark-red)";
-  const textColorAttr =
-    color === "buy" ? "var(--darked-green)" : "var(--darked-red)";
-  const fifteenDaysLater = new Date();
-  fifteenDaysLater.setDate(fifteenDaysLater.getDate() + 15);
-  const fullUrl = `${url}?color=${color}`;
+  const textColorAttr = color === "buy" ? "var(--darked-green)" : "var(--darked-red)";
+
   return (
-    <Link href={fullUrl}> {/* لینک به صفحه مقصد */}
+    <Link href={url}>
       <div
         className={styles.card}
         style={{
@@ -26,49 +20,47 @@ const ProductCard = ({ color, url }) => {
           "--border-color": backgroundColor,
           "--bg-color-hover": backgroundColorHover,
           "--text-attr": textColorAttr,
-          cursor: "pointer", // تغییر ظاهر ماوس به صورت pointer
+          cursor: "pointer",
         }}
       >
-        {/* تصویر مربع سمت راست */}
+        {/* تصویر محصول */}
         <div className={styles.imageContainer}>
-          <Image
-            src="/images/nopic.png" // مسیر به تصویر ذخیره شده
-            alt="product"
-            width={100} // اندازه ثابت مربع
+          <img
+            src={imageSrc}
+            alt={title}
+            width={100}
             height={100}
             className={styles.image}
           />
         </div>
 
-        {/* اطلاعات محصول سمت چپ */}
+        {/* اطلاعات محصول */}
         <div className={styles.info}>
-          <h2 className={styles.title}>عنوان محصول</h2>
+          <h2 className={styles.title}>{title}</h2>
           <p className={styles.offer}>
-            بالاترین پیشنهاد: <span className={styles.green}>{formatNumber(89000)} </span>
+            بالاترین پیشنهاد: <span className={styles.green}>{formatNumber(top_price_bid)}</span>
             تومان
           </p>
           <div className={styles.details}>
             <p className={styles.detail}>
               <span className={styles.icon}>💰</span>
               <span className={styles.attr}>قیمت :</span>
-              <span className={styles.bold}>{formatNumber(85000)}  </span>
-              تومان
+              <span className={styles.bold}>{formatNumber(price)}</span> تومان
             </p>
             <p className={styles.detail}>
               <span className={styles.icon}>📦</span>
               <span className={styles.attr}>بسته‌بندی :</span>
-              کارتن 5 کیلویی
+              {packaging}
             </p>
             <p className={styles.detail}>
               <span className={styles.icon}>⚖️</span>
               <span className={styles.attr}>وزن :</span>
-              <span className={styles.bold}>{formatNumber(3000)}</span>
-              کیلوگرم
+              <span className={styles.bold}>{formatNumber(weight)}</span> کیلوگرم
             </p>
           </div>
         </div>
         <div className={styles.timer}>
-          <CountdownTimer targetDate={fifteenDaysLater} />
+          <CountdownTimer targetDate={new Date(finished_time)} />
         </div>
       </div>
     </Link>

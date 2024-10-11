@@ -1,11 +1,26 @@
 import { useState } from "react";
 import Image from "next/image";
 import Barcode from "react-barcode";
-import formatNumber from '@/components/utils/FormatNumber/formatNumber';
+import formatNumber from "@/components/utils/FormatNumber/formatNumber";
 import styles from "./SingleCard.module.css";
-import CountdownTimer from "@/components/utils/timer/CountdownTimer"; // فرض بر این است که تایمر در مسیر صحیح قرار دارد.
+import CountdownTimer from "@/components/utils/timer/CountdownTimer";
 
-const SingleCard = ({ color, images, description, qrValue }) => {
+const SingleCard = ({
+  color,
+  images,
+  description,
+  barcode,
+  weight,
+  price,
+  warranty,
+  lable,
+  name,
+  top_price_bid,
+  user,
+  attrs,
+  expireTime,
+}) => {
+  const totalCost = weight * price;
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const backgroundColor =
@@ -15,10 +30,7 @@ const SingleCard = ({ color, images, description, qrValue }) => {
   const textColor = color === "buy" ? "var(--dark-green)" : "var(--dark-red)";
   const textColorAttr =
     color === "buy" ? "var(--darked-green)" : "var(--darked-red)";
-  const fifteenDaysLater = new Date();
-  fifteenDaysLater.setDate(fifteenDaysLater.getDate() + 1);
 
-  // تابع برای تغییر اسلاید
   const goToNextImage = () => {
     setCurrentImageIndex((currentImageIndex + 1) % images.length);
   };
@@ -43,21 +55,19 @@ const SingleCard = ({ color, images, description, qrValue }) => {
     >
       {/* اسلایدر تصاویر */}
       <div className={styles.imageSlider}>
-        <Image
-          src={images[currentImageIndex]} // تصویر فعلی
+        <img
+          src={images[currentImageIndex] || "/images/no_pic.jpg"} // اگر تصویر وجود ندارد، تصویر پیش‌فرض را نمایش بده
           alt="Product Image"
           width={200}
           height={200}
           className={styles.image}
         />
-        {/* دکمه‌های جابجایی */}
         <button className={styles.prevButton} onClick={goToPreviousImage}>
           &#10094;
         </button>
         <button className={styles.nextButton} onClick={goToNextImage}>
           &#10095;
         </button>
-        {/* نشانگرهای تصویر */}
         <div className={styles.dots}>
           {images.map((_, index) => (
             <span
@@ -73,52 +83,54 @@ const SingleCard = ({ color, images, description, qrValue }) => {
 
       {/* اطلاعات محصول */}
       <div className={styles.info}>
-        <h2 className={styles.title}>عنوان محصول</h2>
+        <span>{lable}</span>
+        <h2 className={styles.title}>{name}</h2>
         <p className={styles.offer}>
-          بالاترین پیشنهاد: <span className={styles.green}>{formatNumber(85000)} </span>
+          بالاترین پیشنهاد:{" "}
+          <span className={styles.green}>{formatNumber(top_price_bid)}</span>
           تومان
         </p>
         <div className={styles.details}>
           <p className={styles.detail}>
             <span className={styles.icon}>💰</span>
             <span className={styles.attr}>قیمت :</span>
-            <span className={styles.bold}> {formatNumber(85000)} </span>
+            <span className={styles.bold}>{formatNumber(price)}</span>
             تومان
           </p>
           <p className={styles.detail}>
             <span className={styles.icon}>📦</span>
             <span className={styles.attr}>بسته‌بندی :</span>
-            کارتن 5 کیلویی
+            {attrs.find((attr) => attr.attr === "بسته بندی")?.value || "نامشخص"}
           </p>
           <p className={styles.detail}>
             <span className={styles.icon}>⚖️</span>
             <span className={styles.attr}>وزن :</span>
-            <span className={styles.bold}>{formatNumber(3000)}</span>
+            <span className={styles.bold}>{formatNumber(weight)}</span>
             کیلوگرم
           </p>
           <p className={styles.under}>{description}</p>
-          <p className={styles.total_price}>{formatNumber(255000000)} 
-            <span>
-            تومان
-            </span></p> 
+          <p className={styles.total_price}>
+            {formatNumber(totalCost)}
+            <span> تومان</span>
+          </p>
         </div>
       </div>
 
       {/* تایمر */}
       <div className={styles.timer}>
-        <CountdownTimer targetDate={fifteenDaysLater} />
+        <CountdownTimer targetDate={new Date(expireTime)} />
       </div>
 
       {/* QR Code */}
       <div className={styles.qrCode}>
         <Barcode
-          value="123456789"
-          format="CODE128" // فرمت بارکد
+          value={String(barcode)}
+          format="CODE128"
           width={2}
           height={110}
-          displayValue={true} // نمایش مقدار زیر بارکد
-          background="#ffffff" // رنگ پس‌زمینه
-          lineColor="#000000" // رنگ خطوط بارکد
+          displayValue={true}
+          background="#ffffff"
+          lineColor="#000000"
         />
       </div>
     </div>

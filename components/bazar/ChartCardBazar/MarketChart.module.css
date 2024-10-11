@@ -32,3 +32,29 @@
     background-color: rgba(0, 0, 0, 0.3);
   }
   
+  .buttonContainer{
+    background-color: rgba(175, 175, 175, 0.1);
+    border: none;
+    border-radius: 5px;
+    color: #000000;
+    padding: 10px 20px;
+    margin-left: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .buttonContainer button{
+    background-color: rgba(219, 161, 0, 0.3);
+    border: none;
+    border-radius: 5px;
+    color: #000000;
+    padding: 10px 20px;
+    margin-left: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  
+  .buttonContainer button:hover{
+    background-color: rgba(219, 161, 0, 0.9);
+  }

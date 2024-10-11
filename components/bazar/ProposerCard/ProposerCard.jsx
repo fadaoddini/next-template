@@ -30,7 +30,11 @@ const ProposerCard = ({ color, proposer }) => {
         <div className={styles.bidSection}>
           <span className={styles.icon}>💰</span> {/* آیکن قیمت */}
           <span className={styles.price}>{formatNumber(proposer.price)}</span>
-          تومان به ازای هر کیلو و در مجموع
+          تومان به ازای هر کیلو 
+         ،
+          <span className={styles.price}>{formatNumber(proposer.weight)}</span>
+          کیلوگرم 
+          و در مجموع
           <span className={styles.price}>
             {formatNumber(proposer.total_price)}
           </span>
@@ -40,7 +44,7 @@ const ProposerCard = ({ color, proposer }) => {
 
       {/* وضعیت پیشنهاد دهنده */}
       <div className={styles.statusContainer}>
-        <span className={styles.status}>{proposer.status}</span>
+        {/* <span className={styles.status}>{proposer.status}</span> */}
         <button className={styles.callButton}>تماس</button>
       </div>
     </div>

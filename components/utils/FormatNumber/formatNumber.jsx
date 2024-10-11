@@ -1,8 +1,10 @@
-// formatNumber.js
-
+// در فایل FormatNumber.js
 const formatNumber = (number) => {
-    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-  };
-  
-  export default formatNumber;
-  
+  const numericValue = parseFloat(number);
+  if (isNaN(numericValue)) {
+    return '0';
+  }
+  return numericValue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+};
+
+export default formatNumber;

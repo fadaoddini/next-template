@@ -18,51 +18,57 @@ const onRefreshed = () => {
 
 // افزودن interceptor به پاسخ‌های axios
 api.interceptors.response.use(
-  (response) => response, // اگر پاسخ موفقیت‌آمیز باشد، آن را برمی‌گرداند
+  (response) => {
+    return response;
+  },
   async (error) => {
     const originalRequest = error.config;
 
-    // بررسی وضعیت 401 و اینکه آیا این درخواست قبلاً تلاش شده است
-    if (error.response && error.response.status === 401 && !originalRequest._retry) {
-      originalRequest._retry = true; // نشان دادن اینکه درخواست قبلاً تلاش شده است
+    console.log("Error status:", error.response ? error.response.status : "No response");
 
+    // بررسی اگر خطای 401 (عدم اعتبار توکن) رخ دهد
+    if (error.response && error.response.status === 401 && !originalRequest._retry) {
+      originalRequest._retry = true;
+
+      // اگر نوسازی توکن قبلاً آغاز شده باشد، درخواست فعلی را منتظر بگذارید
       if (isRefreshing) {
-        // اگر در حال حاضر در حال نوسازی توکن هستیم
         return new Promise((resolve) => {
           refreshSubscribers.push(() => {
-            resolve(api(originalRequest)); // زمانی که توکن جدید دریافت شد، درخواست اصلی را دوباره ارسال کنید
+            resolve(api(originalRequest));  // استفاده از api بجای axios
           });
         });
       }
 
-      isRefreshing = true; // تغییر وضعیت نوسازی توکن
+      isRefreshing = true;
 
       try {
-        const refreshToken = Cookies.get("refreshToken"); // دریافت توکن رفرش از کوکی‌ها
-        console.log("refreshToken api:", refreshToken);
+        // درخواست برای دریافت توکن جدید با استفاده از refreshToken
         const response = await axios.post(
           Config.getApiUrl("login", "refreshToken"),
-          { refresh: refreshToken }, // ارسال توکن رفرش به سرور
+          {},
           { withCredentials: true }
         );
 
+        console.log("Refresh token response:", response.data);
+
         if (response.status === 200) {
-          const { accessToken, refreshToken } = response.data; // فرض بر این است که هر دو توکن را دریافت کرده‌اید
-          Cookies.set("accessToken", accessToken, { expires: 1 / 24 }); // تنظیم زمان انقضا برای توکن دسترسی
-          Cookies.set("refreshToken", refreshToken, { expires: 7 }); // تنظیم زمان انقضا برای توکن رفرش
-          onRefreshed(); // فراخوانی درخواست‌های معلق
-          isRefreshing = false; // بازگشت به وضعیت عادی
-          return api(originalRequest); // ارسال دوباره درخواست اصلی
+          Cookies.set("accessToken", response.data.accessToken);
+          onRefreshed();
+          isRefreshing = false;
+
+          return api(originalRequest); // استفاده از api بجای axios
         }
       } catch (refreshError) {
         console.error("Error refreshing token:", refreshError);
-        isRefreshing = false; // بازگشت به وضعیت عادی در صورت خطا
-        window.location.href = "/"; // هدایت به صفحه ورود در صورت خطا
+        isRefreshing = false; // اینجا را هم تنظیم کنید
+
+        window.location.href = "/"; // هدایت به صفحه لاگین در صورت عدم موفقیت
       }
     }
 
-    return Promise.reject(error); // در غیر اینصورت خطا را برمی‌گرداند
+    return Promise.reject(error);
   }
 );
+
 
 export default api; // صادرات api برای استفاده در دیگر قسمت‌ها
