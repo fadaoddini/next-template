@@ -23,8 +23,8 @@ const nextConfig = {
         destination: '/desktop/shop/',
       },
       {
-        source: '/shop/single',
-        destination: '/desktop/shop/single',
+        source: '/shop/single/:id',
+        destination: '/desktop/shop/single/[id]', // مسیر مقصد واقعی
       },
       {
         source: '/shop/cart',

@@ -104,7 +104,7 @@ const DesktopNavBar = () => {
                   بازار عمده
                 </Link>
               </li>
-              <li className={styles.nav_item}>
+              {/* <li className={styles.nav_item}>
                 <Link href="/transport/select" className={styles.nav_link}>
                   حمل و نقل
                 </Link>
@@ -113,7 +113,7 @@ const DesktopNavBar = () => {
                 <Link href="/shop" className={styles.nav_link}>
                   فروشگاه
                 </Link>
-              </li>
+              </li> */}
               <li className={styles.nav_item}>
                 <Link href="/law" className={styles.nav_link}>
                   قوانین
@@ -123,17 +123,44 @@ const DesktopNavBar = () => {
 
             <div className={styles.left_menu}>
               {authStatus ? (
-                <div className={styles.tooltip_container}>
-                  <Image
-                    src={iconSrc.exit}
-                    alt="خروج"
-                    className={`${styles.icon} ${styles.icon_exit}`}
-                    onClick={handleLogoutClick}
-                    onMouseEnter={() => handleMouseEnter("exit")}
-                    onMouseLeave={() => handleMouseLeave("exit")}
-                  />
-                  <div className={styles.tooltip}>خروج</div>
-                </div>
+                <>
+                  <div className={styles.tooltip_container}>
+                    <Link href="/faq">
+                      <Image
+                        src={iconSrc.question}
+                        alt="سوالات متداول"
+                        className={`${styles.icon} ${styles.icon_question}`}
+                        onMouseEnter={() => handleMouseEnter("question")}
+                        onMouseLeave={() => handleMouseLeave("question")}
+                      />
+                      <div className={styles.tooltip}>سوالات متداول</div>
+                    </Link>
+                  </div>
+                  <div className={styles.tooltip_container}>
+                    <Link href="/profile">
+                      <Image
+                        src={iconSrc.profile}
+                        alt="پروفایل"
+                        className={`${styles.icon} ${styles.icon_profile}`}
+                        onMouseEnter={() => handleMouseEnter("profile")}
+                        onMouseLeave={() => handleMouseLeave("profile")}
+                      />
+                      <div className={styles.tooltip}>پروفایل</div>
+                    </Link>
+                  </div>
+
+                  <div className={styles.tooltip_container}>
+                    <Image
+                      src={iconSrc.exit}
+                      alt="خروج"
+                      className={`${styles.icon} ${styles.icon_exit}`}
+                      onClick={handleLogoutClick}
+                      onMouseEnter={() => handleMouseEnter("exit")}
+                      onMouseLeave={() => handleMouseLeave("exit")}
+                    />
+                    <div className={styles.tooltip}>خروج</div>
+                  </div>
+                </>
               ) : (
                 <div className={styles.tooltip_container}>
                   <Link href="/login">
@@ -149,20 +176,7 @@ const DesktopNavBar = () => {
                 </div>
               )}
 
-              <div className={styles.tooltip_container}>
-                <Link href="/faq">
-                  <Image
-                    src={iconSrc.question}
-                    alt="سوالات متداول"
-                    className={`${styles.icon} ${styles.icon_question}`}
-                    onMouseEnter={() => handleMouseEnter("question")}
-                    onMouseLeave={() => handleMouseLeave("question")}
-                  />
-                  <div className={styles.tooltip}>سوالات متداول</div>
-                </Link>
-              </div>
-
-              <div className={styles.tooltip_container}>
+              {/* <div className={styles.tooltip_container}>
                 <Link href="/shop/cart">
                   <Image
                     src={iconSrc.cart}
@@ -173,7 +187,7 @@ const DesktopNavBar = () => {
                   />
                   <div className={styles.tooltip}>سبد خرید</div>
                 </Link>
-              </div>
+              </div> */}
             </div>
           </nav>
         </div>
