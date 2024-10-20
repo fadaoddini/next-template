@@ -51,16 +51,16 @@ const ShopCard = ({ shopData }) => {
 };
 
 
-ShopCard.propTypes = {
-  shopData: PropTypes.shape({
-    name_shop: PropTypes.string.isRequired,
-    administrator: PropTypes.string.isRequired,
-    mobile: PropTypes.string.isRequired,
-    address: PropTypes.string.isRequired,
-    image: PropTypes.string.isRequired,
-    is_active: PropTypes.bool.isRequired,
-  }).isRequired,
-};
+// ShopCard.propTypes = {
+//   shopData: PropTypes.shape({
+//     name_shop: PropTypes.string.isRequired,
+//     administrator: PropTypes.string.isRequired,
+//     mobile: PropTypes.string.isRequired,
+//     address: PropTypes.string.isRequired,
+//     image: PropTypes.string.isRequired,
+//     is_active: PropTypes.bool.isRequired,
+//   }).isRequired,
+// };
 
 
 export default ShopCard;

@@ -14,15 +14,15 @@ import ImageSlider from "@/components/utils/ImageSlider/ImageSlider";
 
 const ProductCard = ({ product }) => {
   const [isEditModalOpen, setEditModalOpen] = useState(false);
-
+  
   const [formData, setFormData] = useState({
-    title: product.title,
-    price: product.price,
-    discount: product.discount,
-    weight: product.weight,
-    number_exist: product.number_exist,
-    number_send: product.number_send,
-    description: product.description,
+    title: product?.title || "",
+    price: product?.price || 0,
+    discount: product?.discount || 0,
+    weight: product?.weight || 0,
+    number_exist: product?.number_exist || 0,
+    number_send: product?.number_send || 0,
+    description: product?.description || "",
   });
 
 
