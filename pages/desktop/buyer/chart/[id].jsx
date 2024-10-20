@@ -2,7 +2,7 @@
 import { useRouter } from "next/router";
 import Config from "config/config";
 import axios from "axios";
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "@/context/AuthContext";
 import DesktopNavBar from "@/components/navbar/DesktopNavBar";
 import styles from "../../../../styles/styleChart.module.css";
@@ -14,16 +14,19 @@ const ChartBazar = ({ color }) => {
   const { authStatus } = useAuth();
   const router = useRouter();
   const { id } = router.query;
+
+  // تعریف stateها
   const [chartData, setChartData] = useState([]);
-  const [catName, setCatName] = useState([]);
+  const [catName, setCatName] = useState({});
   const [sellQueue, setSellQueue] = useState([]);
   const [buyQueue, setBuyQueue] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    if (!id || !authStatus) return; // بررسی اینکه id و authStatus وجود داشته باشند
+
     const fetchChart = async () => {
-      if (!id) return;
       setLoading(true);
       try {
         const url = Config.getApiUrl("catalogue", `chart/${id}/`);
@@ -41,9 +44,7 @@ const ChartBazar = ({ color }) => {
     };
 
     const fetchName = async () => {
-      if (!id) return;
       try {
-        // درخواست برای دریافت صف فروش
         const response = await axios.get(
           Config.getApiUrl("catalogue", `category/name/${id}/`)
         );
@@ -51,14 +52,12 @@ const ChartBazar = ({ color }) => {
           setCatName(response.data);
         }
       } catch (error) {
-        console.error("خطا در دریافت صف‌ها:", error);
+        console.error("خطا در دریافت نام دسته‌بندی:", error);
       }
     };
 
     const fetchQueues = async () => {
-      if (!id) return;
       try {
-        // درخواست برای دریافت صف فروش
         const sellResponse = await axios.get(
           Config.getApiUrl("catalogue", `buy/bid/list/chart/${id}/`)
         );
@@ -69,11 +68,9 @@ const ChartBazar = ({ color }) => {
         }));
         setSellQueue(sellItems);
 
-        // درخواست برای دریافت صف خرید
         const buyResponse = await axios.get(
           Config.getApiUrl("catalogue", `sell/bid/list/chart/${id}/`)
         );
-
         const buyItems = buyResponse.data.map((bid) => ({
           price: bid.price,
           quantity: bid.weight,
@@ -85,20 +82,19 @@ const ChartBazar = ({ color }) => {
       }
     };
 
-    if (authStatus) {
-      fetchChart();
-      fetchQueues();
-      fetchName();
-    }
+    // فراخوانی توابع
+    fetchChart();
+    fetchName();
+    fetchQueues();
   }, [id, authStatus]);
 
   const sanitizedChartData = chartData.map((item) => ({
-    date: item.date,
-    maxPriceSell: item.maxPriceSell === 0 ? null : item.maxPriceSell,
-    minPriceSell: item.minPriceSell === 0 ? null : item.minPriceSell,
-    maxPriceBuy: item.maxPriceBuy === 0 ? null : item.maxPriceBuy,
-    minPriceBuy: item.minPriceBuy === 0 ? null : item.minPriceBuy,
-    volume: item.volume === 0 ? null : item.volume,
+    date: item?.date || "",
+    maxPriceSell: item?.maxPriceSell === 0 ? null : item?.maxPriceSell,
+    minPriceSell: item?.minPriceSell === 0 ? null : item?.minPriceSell,
+    maxPriceBuy: item?.maxPriceBuy === 0 ? null : item?.maxPriceBuy,
+    minPriceBuy: item?.minPriceBuy === 0 ? null : item?.minPriceBuy,
+    volume: item?.volume === 0 ? null : item?.volume,
   }));
 
   return (
@@ -107,10 +103,10 @@ const ChartBazar = ({ color }) => {
       <div className={styles.layout}>
         <div className={styles.right}>
           <DesChartBazar
-            imageSrc={`${Config.baseUrl}${catName.image}`}
-            title={`${catName.name} ${catName.title}`}
+            imageSrc={`${Config.baseUrl}${catName?.image || ""}`}
+            title={`${catName?.name || ""} ${catName?.title || ""}`}
             link="/"
-            description={catName.description}
+            description={catName?.description || "بدون توضیح"}
           />
         </div>
         <div className={styles.main}>
@@ -124,8 +120,18 @@ const ChartBazar = ({ color }) => {
             )}
           </div>
           <div className={styles.gridContainer}>
-            <QueueList items={sellQueue} color="sell" title="صف فروشندگان" catName={catName} />
-            <QueueList items={buyQueue} color="buy" title="صف خریداران" catName={catName} />
+            <QueueList
+              items={sellQueue}
+              color="sell"
+              title="صف فروشندگان"
+              catName={catName}
+            />
+            <QueueList
+              items={buyQueue}
+              color="buy"
+              title="صف خریداران"
+              catName={catName}
+            />
           </div>
         </div>
       </div>
