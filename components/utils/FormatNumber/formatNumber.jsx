@@ -1,5 +1,5 @@
 // در فایل FormatNumber.js
-const formatNumber = (number) => {
+const formatPrice = (number) => {
   const numericValue = parseFloat(number);
   if (isNaN(numericValue)) {
     return '0';
@@ -7,4 +7,4 @@ const formatNumber = (number) => {
   return numericValue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 };
 
-export default formatNumber;
+export default formatPrice;
