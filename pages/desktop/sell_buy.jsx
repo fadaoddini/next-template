@@ -18,6 +18,9 @@ const DesktopHomePage = () => {
     try {
       const response = await axios.get(Config.getApiUrl("catalogue", "all_types"));
       setData(response.data);
+      console.log("**********************response.data*************************");
+      console.log(response.data);
+      console.log("**********************response.data*************************");
       setLoading(false); // پایان بارگذاری
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -90,6 +93,7 @@ const DesktopHomePage = () => {
               description={item.title}
               imageSrc={`${Config.baseUrl}${item.image}`} // ترکیب baseUrl با image
               buttonText="انتخاب"
+              linkUrl="/bazar/details"
             />
           ))}
         </div>
