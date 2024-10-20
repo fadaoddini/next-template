@@ -1,24 +1,12 @@
 import React, { useState, useEffect } from "react";
-
 import AddModalShop from "./AddModalShop";
-
 import AddProductInShopModal from "./AddProductInShopModal";
-
-
 import DesktopNavBar from "@/components/navbar/DesktopNavBar";
-
-import Loading from "@/components/utils/loading";
-
 import ShopCard from "./ShopCard";
-
 import CardShop from "@/components/admin/shop/cardShop/cardShop";
-
 import ActiveProduct from "./active/ProductCard";
-
 import NotActiveProduct from "./notActive/ProductCard";
-
 import VijeProduct from "./vije/ProductCard";
-
 import styles from "@/styles/styleShopAdmin.module.css";
 
 import {
