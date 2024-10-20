@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { formatPrice } from "@/components/utils/FormatNumber/formatNumber"; 
+import formatPrice from "@/components/utils/FormatNumber/formatNumber"; 
 import Config from "config/config";
 import styles from "./notActive.module.css"; 
 // import EditModalProduct from "../EditModalProduct";
