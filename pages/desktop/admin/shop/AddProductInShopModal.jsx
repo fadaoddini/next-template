@@ -11,7 +11,7 @@ import styles from "./AddProductInShopModal.module.css";
 
 
 // توابع API
-import { fetchCategories, fetchChildCategories, fetchPackages } from "./shopUtils";
+import { fetchCategories, fetchChildCategories, fetchPackages } from "../../../../components/shop/admin/shopUtils";
 
 
 const AddProductModal = ({ isOpen, toggleModal }) => {

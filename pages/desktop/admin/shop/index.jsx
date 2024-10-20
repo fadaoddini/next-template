@@ -15,7 +15,7 @@ import {
   fetchInactiveProducts,
   fetchActiveProducts,
   fetchFeaturedProducts,
-} from "./shopUtils";
+} from "../../../../components/shop/admin/shopUtils";
 
 
 const Shop = () => {
