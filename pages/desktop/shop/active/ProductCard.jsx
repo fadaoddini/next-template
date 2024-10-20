@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import { formatPrice } from "../../../components/utils/utils"; 
-import Config from "../../../config/config";
-import nopic from "../../../assets/images/nopic.png";
+import { formatPrice } from "@/components/utils/FormatNumber/formatNumber"; 
+import Config from "config/config";
 import styles from "./active.module.css"; 
-import EditModalProduct from "../EditModalProduct";
-import ImageSlider from "../../../components/utils/ImageSlider/ImageSlider"; // ایمپورت جدید
+// import EditModalProduct from "../EditModalProduct";
+import ImageSlider from "@/components/utils/ImageSlider/ImageSlider"; // ایمپورت جدید
 
 const ProductCard = ({ product }) => {
   const [isEditModalOpen, setEditModalOpen] = useState(false);
@@ -100,7 +99,7 @@ const ProductCard = ({ product }) => {
         </div>
       </div>
 
-      <EditModalProduct
+      {/* <EditModalProduct
         isOpen={isEditModalOpen}
         toggleModal={handleToggleEditModal}
         handleSubmit={handleEditSubmit}
@@ -109,7 +108,7 @@ const ProductCard = ({ product }) => {
         formData={formData}
         productData={product}
         productImages={product.images}
-      />
+      /> */}
     </>
   );
 };
